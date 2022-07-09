@@ -70,7 +70,9 @@ If no recognized module system is present, access bundle contents via the global
 ```html
 <script type="text/javascript">
 (function () {
+(function () {
     window.meanpw;
+})();
 })();
 </script>
 ```
@@ -182,6 +184,7 @@ var v = meanpw.ndarray( N, x, 2, 1 );
 <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/stats-base-meanpw@umd/browser.js"></script>
 <script type="text/javascript">
 (function () {
+(function () {
 
 var x;
 var i;
@@ -195,6 +198,7 @@ console.log( x );
 var v = meanpw( x.length, x, 1 );
 console.log( v );
 
+})();
 })();
 </script>
 </body>
@@ -312,11 +316,11 @@ Copyright &copy; 2016-2022. The Stdlib [Authors][stdlib-authors].
 
 <!-- <related-links> -->
 
-[@stdlib/stats/base/dmeanpw]: https://github.com/stdlib-js/stats-base-dmeanpw/tree/umd
+[@stdlib/stats/base/dmeanpw]: https://github.com/stdlib-js/stats-base-dmeanpw/tree/umd/tree/umd
 
-[@stdlib/stats/base/mean]: https://github.com/stdlib-js/stats-base-mean/tree/umd
+[@stdlib/stats/base/mean]: https://github.com/stdlib-js/stats-base-mean/tree/umd/tree/umd
 
-[@stdlib/stats/base/smeanpw]: https://github.com/stdlib-js/stats-base-smeanpw/tree/umd
+[@stdlib/stats/base/smeanpw]: https://github.com/stdlib-js/stats-base-smeanpw/tree/umd/tree/umd
 
 <!-- </related-links> -->
 
