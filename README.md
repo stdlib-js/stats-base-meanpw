@@ -56,49 +56,42 @@ The [arithmetic mean][arithmetic-mean] is defined as
 
 <!-- /.intro -->
 
+<section class="installation">
 
+## Installation
+
+```bash
+npm install @stdlib/stats-base-meanpw
+```
+
+Alternatively,
+
+-   To load the package in a website via a `script` tag without installation and bundlers, use the [ES Module][es-module] available on the [`esm`][esm-url] branch (see [README][esm-readme]).
+-   If you are using Deno, visit the [`deno`][deno-url] branch (see [README][deno-readme] for usage intructions).
+-   For use in Observable, or in browser/node environments, use the [Universal Module Definition (UMD)][umd] build available on the [`umd`][umd-url] branch (see [README][umd-readme]).
+
+The [branches.md][branches-url] file summarizes the available branches and displays a diagram illustrating their relationships.
+
+To view installation and usage instructions specific to each branch build, be sure to explicitly navigate to the respective README files on each branch, as linked to above.
+
+</section>
 
 <section class="usage">
 
 ## Usage
 
-To use in Observable,
-
 ```javascript
-meanpw = require( 'https://cdn.jsdelivr.net/gh/stdlib-js/stats-base-meanpw@umd/browser.js' )
+var meanpw = require( '@stdlib/stats-base-meanpw' );
 ```
 
-To vendor stdlib functionality and avoid installing dependency trees for Node.js, you can use the UMD server build:
+#### meanpw( N, x, strideX )
 
-```javascript
-var meanpw = require( 'path/to/vendor/umd/stats-base-meanpw/index.js' )
-```
-
-To include the bundle in a webpage,
-
-```html
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/stats-base-meanpw@umd/browser.js"></script>
-```
-
-If no recognized module system is present, access bundle contents via the global scope:
-
-```html
-<script type="text/javascript">
-(function () {
-    window.meanpw;
-})();
-</script>
-```
-
-#### meanpw( N, x, stride )
-
-Computes the [arithmetic mean][arithmetic-mean] of a strided array `x` using pairwise summation.
+Computes the [arithmetic mean][arithmetic-mean] of a strided array using pairwise summation.
 
 ```javascript
 var x = [ 1.0, -2.0, 2.0 ];
-var N = x.length;
 
-var v = meanpw( N, x, 1 );
+var v = meanpw( x.length, x, 1 );
 // returns ~0.3333
 ```
 
@@ -106,17 +99,14 @@ The function has the following parameters:
 
 -   **N**: number of indexed elements.
 -   **x**: input [`Array`][mdn-array] or [`typed array`][mdn-typed-array].
--   **stride**: index increment for `x`.
+-   **strideX**: stride length for `x`.
 
-The `N` and `stride` parameters determine which elements in `x` are accessed at runtime. For example, to compute the [arithmetic mean][arithmetic-mean] of every other element in `x`,
+The `N` and stride parameters determine which elements in the strided array are accessed at runtime. For example, to compute the [arithmetic mean][arithmetic-mean] of every other element in `x`,
 
 ```javascript
-var floor = require( '@stdlib/math-base-special-floor' );
-
 var x = [ 1.0, 2.0, 2.0, -7.0, -2.0, 3.0, 4.0, 2.0 ];
-var N = floor( x.length / 2 );
 
-var v = meanpw( N, x, 2 );
+var v = meanpw( 4, x, 2 );
 // returns 1.25
 ```
 
@@ -126,42 +116,35 @@ Note that indexing is relative to the first index. To introduce an offset, use [
 
 ```javascript
 var Float64Array = require( '@stdlib/array-float64' );
-var floor = require( '@stdlib/math-base-special-floor' );
 
 var x0 = new Float64Array( [ 2.0, 1.0, 2.0, -2.0, -2.0, 2.0, 3.0, 4.0 ] );
 var x1 = new Float64Array( x0.buffer, x0.BYTES_PER_ELEMENT*1 ); // start at 2nd element
 
-var N = floor( x0.length / 2 );
-
-var v = meanpw( N, x1, 2 );
+var v = meanpw( 4, x1, 2 );
 // returns 1.25
 ```
 
-#### meanpw.ndarray( N, x, stride, offset )
+#### meanpw.ndarray( N, x, strideX, offsetX )
 
 Computes the [arithmetic mean][arithmetic-mean] of a strided array using pairwise summation and alternative indexing semantics.
 
 ```javascript
 var x = [ 1.0, -2.0, 2.0 ];
-var N = x.length;
 
-var v = meanpw.ndarray( N, x, 1, 0 );
+var v = meanpw.ndarray( x.length, x, 1, 0 );
 // returns ~0.33333
 ```
 
 The function has the following additional parameters:
 
--   **offset**: starting index for `x`.
+-   **offsetX**: starting index for `x`.
 
-While [`typed array`][mdn-typed-array] views mandate a view offset based on the underlying `buffer`, the `offset` parameter supports indexing semantics based on a starting index. For example, to calculate the [arithmetic mean][arithmetic-mean] for every other value in `x` starting from the second value
+While [`typed array`][mdn-typed-array] views mandate a view offset based on the underlying buffer, the offset parameter supports indexing semantics based on a starting index. For example, to calculate the [arithmetic mean][arithmetic-mean] for every other element in `x` starting from the second element
 
 ```javascript
-var floor = require( '@stdlib/math-base-special-floor' );
-
 var x = [ 2.0, 1.0, 2.0, -2.0, -2.0, 2.0, 3.0, 4.0 ];
-var N = floor( x.length / 2 );
 
-var v = meanpw.ndarray( N, x, 2, 1 );
+var v = meanpw.ndarray( 4, x, 2, 1 );
 // returns 1.25
 ```
 
@@ -174,6 +157,7 @@ var v = meanpw.ndarray( N, x, 2, 1 );
 ## Notes
 
 -   If `N <= 0`, both functions return `NaN`.
+-   Both functions support array-like objects having getter and setter accessors for array element access (e.g., [`@stdlib/array-base/accessor`][@stdlib/array/base/accessor]).
 -   In general, pairwise summation is more numerically stable than ordinary recursive summation (i.e., "simple" summation), with slightly worse performance. While not the most numerically stable summation technique (e.g., compensated summation techniques such as the Kahan–Babuška-Neumaier algorithm are generally more numerically stable), pairwise summation strikes a reasonable balance between numerical stability and performance. If either numerical stability or performance is more desirable for your use case, consider alternative summation techniques.
 -   Depending on the environment, the typed versions ([`dmeanpw`][@stdlib/stats/strided/dmeanpw], [`smeanpw`][@stdlib/stats/strided/smeanpw], etc.) are likely to be significantly more performant.
 
@@ -187,33 +171,17 @@ var v = meanpw.ndarray( N, x, 2, 1 );
 
 <!-- eslint no-undef: "error" -->
 
-```html
-<!DOCTYPE html>
-<html lang="en">
-<body>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/random-base-randu@umd/browser.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/math-base-special-round@umd/browser.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/array-float64@umd/browser.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/stats-base-meanpw@umd/browser.js"></script>
-<script type="text/javascript">
-(function () {
+```javascript
+var discreteUniform = require( '@stdlib/random-array-discrete-uniform' );
+var meanpw = require( '@stdlib/stats-base-meanpw' );
 
-var x;
-var i;
-
-x = new Float64Array( 10 );
-for ( i = 0; i < x.length; i++ ) {
-    x[ i ] = round( (randu()*100.0) - 50.0 );
-}
+var x = discreteUniform( 10, -50, 50, {
+    'dtype': 'float64'
+});
 console.log( x );
 
 var v = meanpw( x.length, x, 1 );
 console.log( v );
-
-})();
-</script>
-</body>
-</html>
 ```
 
 </section>
@@ -328,13 +296,15 @@ Copyright &copy; 2016-2025. The Stdlib [Authors][stdlib-authors].
 
 [@higham:1993a]: https://doi.org/10.1137/0914050
 
+[@stdlib/array/base/accessor]: https://github.com/stdlib-js/array-base-accessor
+
 <!-- <related-links> -->
 
-[@stdlib/stats/strided/dmeanpw]: https://github.com/stdlib-js/stats-strided-dmeanpw/tree/umd
+[@stdlib/stats/strided/dmeanpw]: https://github.com/stdlib-js/stats-strided-dmeanpw
 
-[@stdlib/stats/strided/mean]: https://github.com/stdlib-js/stats-strided-mean/tree/umd
+[@stdlib/stats/strided/mean]: https://github.com/stdlib-js/stats-strided-mean
 
-[@stdlib/stats/strided/smeanpw]: https://github.com/stdlib-js/stats-strided-smeanpw/tree/umd
+[@stdlib/stats/strided/smeanpw]: https://github.com/stdlib-js/stats-strided-smeanpw
 
 <!-- </related-links> -->
 
