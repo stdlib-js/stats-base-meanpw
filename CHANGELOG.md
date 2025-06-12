@@ -4,7 +4,29 @@
 
 <section class="release" id="unreleased">
 
-## Unreleased (2025-06-09)
+## Unreleased (2025-06-12)
+
+<section class="features">
+
+### Features
+
+-   [`b0a23c1`](https://github.com/stdlib-js/stdlib/commit/b0a23c1a45b2e86bd16b9761629acbe0d4f05ff7) - add support for accessor arrays and refactor `stats/base/meanpw` [(#7319)](https://github.com/stdlib-js/stdlib/pull/7319)
+
+</section>
+
+<!-- /.features -->
+
+<section class="issues">
+
+### Closed Issues
+
+This release closes the following issue:
+
+[#5651](https://github.com/stdlib-js/stdlib/issues/5651)
+
+</section>
+
+<!-- /.issues -->
 
 <section class="commits">
 
@@ -12,6 +34,7 @@
 
 <details>
 
+-   [`b0a23c1`](https://github.com/stdlib-js/stdlib/commit/b0a23c1a45b2e86bd16b9761629acbe0d4f05ff7) - **feat:** add support for accessor arrays and refactor `stats/base/meanpw` [(#7319)](https://github.com/stdlib-js/stdlib/pull/7319) _(by Gururaj Gurram)_
 -   [`3565318`](https://github.com/stdlib-js/stdlib/commit/3565318e3639b3e44890ed15ccd73560d3cac14c) - **refactor:** update paths _(by Gururaj Gurram)_
 -   [`a12088a`](https://github.com/stdlib-js/stdlib/commit/a12088a6203c3725098b48867ea97582f53153a2) - **refactor:** update paths _(by Aayush Khanna)_
 -   [`5a7aa5f`](https://github.com/stdlib-js/stdlib/commit/5a7aa5f8ce1bc39cb8bf450454e4faddeae5a245) - **refactor:** update paths _(by Aayush Khanna)_
