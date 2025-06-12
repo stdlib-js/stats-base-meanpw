@@ -56,32 +56,38 @@ The [arithmetic mean][arithmetic-mean] is defined as
 
 <!-- /.intro -->
 
-<section class="installation">
 
-## Installation
-
-```bash
-npm install @stdlib/stats-base-meanpw
-```
-
-Alternatively,
-
--   To load the package in a website via a `script` tag without installation and bundlers, use the [ES Module][es-module] available on the [`esm`][esm-url] branch (see [README][esm-readme]).
--   If you are using Deno, visit the [`deno`][deno-url] branch (see [README][deno-readme] for usage intructions).
--   For use in Observable, or in browser/node environments, use the [Universal Module Definition (UMD)][umd] build available on the [`umd`][umd-url] branch (see [README][umd-readme]).
-
-The [branches.md][branches-url] file summarizes the available branches and displays a diagram illustrating their relationships.
-
-To view installation and usage instructions specific to each branch build, be sure to explicitly navigate to the respective README files on each branch, as linked to above.
-
-</section>
 
 <section class="usage">
 
 ## Usage
 
+To use in Observable,
+
 ```javascript
-var meanpw = require( '@stdlib/stats-base-meanpw' );
+meanpw = require( 'https://cdn.jsdelivr.net/gh/stdlib-js/stats-base-meanpw@umd/browser.js' )
+```
+
+To vendor stdlib functionality and avoid installing dependency trees for Node.js, you can use the UMD server build:
+
+```javascript
+var meanpw = require( 'path/to/vendor/umd/stats-base-meanpw/index.js' )
+```
+
+To include the bundle in a webpage,
+
+```html
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/stats-base-meanpw@umd/browser.js"></script>
+```
+
+If no recognized module system is present, access bundle contents via the global scope:
+
+```html
+<script type="text/javascript">
+(function () {
+    window.meanpw;
+})();
+</script>
 ```
 
 #### meanpw( N, x, strideX )
@@ -171,9 +177,14 @@ var v = meanpw.ndarray( 4, x, 2, 1 );
 
 <!-- eslint no-undef: "error" -->
 
-```javascript
-var discreteUniform = require( '@stdlib/random-array-discrete-uniform' );
-var meanpw = require( '@stdlib/stats-base-meanpw' );
+```html
+<!DOCTYPE html>
+<html lang="en">
+<body>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/random-array-discrete-uniform@umd/browser.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/stats-base-meanpw@umd/browser.js"></script>
+<script type="text/javascript">
+(function () {
 
 var x = discreteUniform( 10, -50, 50, {
     'dtype': 'float64'
@@ -182,6 +193,11 @@ console.log( x );
 
 var v = meanpw( x.length, x, 1 );
 console.log( v );
+
+})();
+</script>
+</body>
+</html>
 ```
 
 </section>
@@ -296,15 +312,15 @@ Copyright &copy; 2016-2025. The Stdlib [Authors][stdlib-authors].
 
 [@higham:1993a]: https://doi.org/10.1137/0914050
 
-[@stdlib/array/base/accessor]: https://github.com/stdlib-js/array-base-accessor
+[@stdlib/array/base/accessor]: https://github.com/stdlib-js/array-base-accessor/tree/umd
 
 <!-- <related-links> -->
 
-[@stdlib/stats/strided/dmeanpw]: https://github.com/stdlib-js/stats-strided-dmeanpw
+[@stdlib/stats/strided/dmeanpw]: https://github.com/stdlib-js/stats-strided-dmeanpw/tree/umd
 
-[@stdlib/stats/strided/mean]: https://github.com/stdlib-js/stats-strided-mean
+[@stdlib/stats/strided/mean]: https://github.com/stdlib-js/stats-strided-mean/tree/umd
 
-[@stdlib/stats/strided/smeanpw]: https://github.com/stdlib-js/stats-strided-smeanpw
+[@stdlib/stats/strided/smeanpw]: https://github.com/stdlib-js/stats-strided-smeanpw/tree/umd
 
 <!-- </related-links> -->
 
